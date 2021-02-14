@@ -1,3 +1,9 @@
 .header {
     text-align: center;
+    color: white;
+    background-color: rgb(15, 15, 92);
+    padding: 6ex;
+    border-style: solid;
+    border-bottom-color: red;
+    border-bottom-width: 1ex;
 }
