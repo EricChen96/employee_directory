@@ -1,8 +1,8 @@
 import React from "react";
-import HeaderBar from "./components/HeaderBar";
+import EmployeeDirectoryContainer from "./components/EmployeeDirectoryContainer";
 
 function App() {
-  return <HeaderBar />;
+  return <EmployeeDirectoryContainer />;
 }
 
 export default App;
