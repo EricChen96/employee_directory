@@ -27,7 +27,7 @@ class EmployeeDirectoryContainer extends React.Component {
                         phone: res.data.results[i].phone,
                         email: res.data.results[i].email,
                         dob: res.data.results[i].dob.date.substr(0, 10),
-                        image: res.data.results[i].picture.thumbnail,
+                        image: res.data.results[i].picture.large,
                         id: i
                     };
                 };
@@ -52,7 +52,6 @@ class EmployeeDirectoryContainer extends React.Component {
     filterUsersBySearch = () => {
         let tempArray = [];
         console.log(this.state.search);
-        // let allUsers = [...this.state.results]
         for (let i = 0; i < allUsers.length; i++) {
             if (allUsers[i].name.indexOf(this.state.search) !== -1 || allUsers[i].email.indexOf(this.state.search) !== -1 || allUsers[i].phone.indexOf(this.state.search) !== -1 || allUsers[i].dob.indexOf(this.state.search) !== -1)
                 tempArray.push(allUsers[i]);
@@ -60,11 +59,8 @@ class EmployeeDirectoryContainer extends React.Component {
         this.setState({results: tempArray});
     }
 
-
-    handleColumnClick = (event) => {
-        const target = event.target.textContent;
+    handleColumnClick = (target) => {
         const sort_by = (field, reverse, primer) => {
-
             const key = primer ?
                 function (x) {
                     return primer(x[field])
@@ -72,14 +68,13 @@ class EmployeeDirectoryContainer extends React.Component {
                 function (x) {
                     return x[field]
                 };
-
             reverse = !reverse ? 1 : -1;
 
             return function (a, b) {
                 return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
             }
         };
-        
+
         if (target === "Name") {
             if (columnBooleans.name) {
                 columnBooleans.name = false;

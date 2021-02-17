@@ -8,19 +8,19 @@ const styles = {
         marginTop: "10px"
     },
     columnTitle: {
-        fontWeight: "bold" 
+        fontWeight: "bold"
     }
 };
 
 function EmployeeDirectory(props) {
     return (
         <div className="container">
-            <div className="row columnTitle" style = {styles.columnTitle}>
+            <div className="row columnTitle" style={styles.columnTitle}>
                 <div className="col-md-2" >Image</div>
-                <div className="col-md-2" onClick={props.handleColumnClick}>Name</div>
-                <div className="col-md-3" onClick={props.handleColumnClick}>Phone</div>
-                <div className="col-md-3" onClick={props.handleColumnClick}>Email</div>
-                <div className="col-md-2" onClick={props.handleColumnClick}>DOB</div>
+                <div className="col-md-2" onClick={() => props.handleColumnClick("Name")}>Name <span>Hidden</span></div>
+                <div className="col-md-3" onClick={() => props.handleColumnClick("Phone")}>Phone <span>Hidden</span></div>
+                <div className="col-md-3" onClick={() => props.handleColumnClick("Email")}>Email <span>Hidden</span></div>
+                <div className="col-md-2" onClick={() => props.handleColumnClick("DOB")}>DOB <span>Hidden</span></div>
             </div>
             {props.results.map((result) => (
                 <div className="row" key={result.id} style={styles.employeeResult}>
