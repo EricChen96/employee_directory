@@ -3,10 +3,12 @@ import SearchForm from "./SearchForm";
 import EmployeeDirectory from "./EmployeeDirectory";
 import React from "react";
 import API from "../utils/API";
-let nameBool = false;
-let phoneBool = false;
-let emailBool = false;
-let dobBool = false;
+let columnBooleans = {
+    name: false,
+    phone: false,
+    email: false,
+    dob: false
+};
 let allUsers = [];
 
 class EmployeeDirectoryContainer extends React.Component {
@@ -77,39 +79,38 @@ class EmployeeDirectoryContainer extends React.Component {
                 return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
             }
         };
-
-
+        
         if (target === "Name") {
-            if (nameBool) {
-                nameBool = false;
+            if (columnBooleans.name) {
+                columnBooleans.name = false;
             } else {
-                nameBool = true;
+                columnBooleans.name = true;
             }
-            this.setState({ results: this.state.results.sort(sort_by("name", nameBool, (a) => a.toUpperCase())) });
+            this.setState({ results: this.state.results.sort(sort_by("name", columnBooleans.name, (a) => a.toUpperCase())) });
         }
         else if (target === "Phone") {
-            if (phoneBool) {
-                phoneBool = false;
+            if (columnBooleans.phone) {
+                columnBooleans.phone = false;
             } else {
-                phoneBool = true;
+                columnBooleans.phone = true;
             }
-            this.setState({ results: this.state.results.sort(sort_by("phone", phoneBool, (a) => a.toUpperCase())) });
+            this.setState({ results: this.state.results.sort(sort_by("phone", columnBooleans.phone, (a) => a.toUpperCase())) });
         }
         else if (target === "Email") {
-            if (emailBool) {
-                emailBool = false;
+            if (columnBooleans.email) {
+                columnBooleans.email = false;
             } else {
-                emailBool = true;
+                columnBooleans.email = true;
             }
-            this.setState({ results: this.state.results.sort(sort_by("email", emailBool, (a) => a.toUpperCase())) });
+            this.setState({ results: this.state.results.sort(sort_by("email", columnBooleans.email, (a) => a.toUpperCase())) });
         }
         else if (target === "DOB") {
-            if (dobBool) {
-                dobBool = false;
+            if (columnBooleans.dob) {
+                columnBooleans.dob = false;
             } else {
-                dobBool = true;
+                columnBooleans.dob = true;
             }
-            this.setState({ results: this.state.results.sort(sort_by("dob", dobBool, parseFloat)) });
+            this.setState({ results: this.state.results.sort(sort_by("dob", columnBooleans.dob, (a) => a.toUpperCase())) });
         }
     }
 

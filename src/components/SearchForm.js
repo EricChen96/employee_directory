@@ -15,8 +15,6 @@ function SearchForm(props) {
         <form>
             <div className="form-group" style={styles.searchBar}>
                 <input
-                    // onChange={props.handleInputChange}
-                    // value={props.search}
                     name="search"
                     type="text"
                     className="form-control"
@@ -25,12 +23,6 @@ function SearchForm(props) {
                     onChange = {props.handleInputChange}
                     value={props.search}
                 />
-                <button
-                    onClick={props.handleFormSubmit}
-                    className= {`btn btn-primary mt-3 ${styles.submitButton}`}
-                >
-                    Search
-                </button>
             </div>
         </form>
     );

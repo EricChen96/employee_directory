@@ -6,13 +6,16 @@ const styles = {
     },
     employeeResult: {
         marginTop: "10px"
+    },
+    columnTitle: {
+        fontWeight: "bold" 
     }
 };
 
 function EmployeeDirectory(props) {
     return (
         <div className="container">
-            <div className="row columnTitle">
+            <div className="row columnTitle" style = {styles.columnTitle}>
                 <div className="col-md-2" >Image</div>
                 <div className="col-md-2" onClick={props.handleColumnClick}>Name</div>
                 <div className="col-md-3" onClick={props.handleColumnClick}>Phone</div>
