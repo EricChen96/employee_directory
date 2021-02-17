@@ -4,33 +4,6 @@ import EmployeeDirectory from "./EmployeeDirectory";
 import React from "react";
 import API from "../utils/API";
 
-const employeeList = [
-    {
-        name: "John Smith",
-        phone: "100-000-0000",
-        email: "johnSmith@gmail.com",
-        dob: "Jan 1, 1990",
-        image: "https://c8.alamy.com/comp/BPNT8G/brad-pitt-mr-and-mrs-smith-mr-and-mrs-smith-mr-mrs-smith-mr-mrs-smith-BPNT8G.jpg",
-        id: 1
-    },
-    {
-        name: "Jane Smith",
-        phone: "100-000-0000",
-        email: "janeSmith@gmail.com",
-        dob: "Jan 30, 1990",
-        image: "https://cdn.onebauer.media/one/empire-tmdb/films/787/images/n4GhKs24bQK2XsdlZ5bZFljzlsK.jpg?quality=50&width=1800&ratio=16-9&resizeStyle=aspectfill&format=jpg",
-        id: 2
-    },
-    {
-        name: "John Wick",
-        phone: "100-000-0000",
-        email: "chosenOne@gmail.com",
-        dob: "Jan 30, 1990",
-        image: "https://www.indiewire.com/wp-content/uploads/2019/05/07956f40-77c4-11e9-9073-657a85982e73.jpg?w=780",
-        id: 3
-    }
-];
-
 class EmployeeDirectoryContainer extends React.Component {
     state = {
         search: "",
@@ -38,17 +11,30 @@ class EmployeeDirectoryContainer extends React.Component {
     }
 
     componentDidMount() {
-
+        API.searchUsers()
+            .then((res) => {
+                let tempUsers = [];
+                for(let i = 0; i < 50; i++) {
+                    tempUsers[i] = {
+                        name: `${res.data.results[i].name.first} ${res.data.results[i].name.last}`,
+                        phone: res.data.results[i].phone,
+                        email: res.data.results[i].email,
+                        dob: res.data.results[i].dob.date,
+                        image: res.data.results[i].picture.thumbnail
+                    };
+                };
+                this.setState({ results: tempUsers});
+            }).catch((err) => {
+                console.log(err);
+            })
     }
-
-    
 
     render() {
         return (
             <div>
                 <HeaderBar />
                 <SearchForm />
-                <EmployeeDirectory results={employeeList} />
+                <EmployeeDirectory results={this.state.results} />
             </div>
         );
     }
