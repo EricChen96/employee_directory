@@ -4,9 +4,10 @@ import EmployeeDirectory from "./EmployeeDirectory";
 import React from "react";
 import API from "../utils/API";
 let nameBool = false;
-let phoneBool = false; 
-let emailBool = false; 
+let phoneBool = false;
+let emailBool = false;
 let dobBool = false;
+let allUsers = [];
 
 class EmployeeDirectoryContainer extends React.Component {
     state = {
@@ -23,25 +24,39 @@ class EmployeeDirectoryContainer extends React.Component {
                         name: `${res.data.results[i].name.first} ${res.data.results[i].name.last}`,
                         phone: res.data.results[i].phone,
                         email: res.data.results[i].email,
-                        dob: res.data.results[i].dob.date.substr(0,10),
+                        dob: res.data.results[i].dob.date.substr(0, 10),
                         image: res.data.results[i].picture.thumbnail,
                         id: i
                     };
                 };
                 this.setState({ results: tempUsers });
+                allUsers = [...this.state.results];
             }).catch((err) => {
                 console.log(err);
             })
     }
 
-    
+
     handleInputChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         this.setState({
             [name]: value,
-        });
+        }, () => {
+            this.filterUsersBySearch();
+        })
     };
+
+    filterUsersBySearch = () => {
+        let tempArray = [];
+        console.log(this.state.search);
+        // let allUsers = [...this.state.results]
+        for (let i = 0; i < allUsers.length; i++) {
+            if (allUsers[i].name.indexOf(this.state.search) !== -1 || allUsers[i].email.indexOf(this.state.search) !== -1 || allUsers[i].phone.indexOf(this.state.search) !== -1 || allUsers[i].dob.indexOf(this.state.search) !== -1)
+                tempArray.push(allUsers[i]);
+        }
+        this.setState({results: tempArray});
+    }
 
 
     handleColumnClick = (event) => {
@@ -63,7 +78,7 @@ class EmployeeDirectoryContainer extends React.Component {
             }
         };
 
-        
+
         if (target === "Name") {
             if (nameBool) {
                 nameBool = false;
