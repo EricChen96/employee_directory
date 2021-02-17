@@ -22,6 +22,8 @@ function SearchForm(props) {
                     className="form-control"
                     placeholder="Search for an employee"
                     id="search"
+                    onChange = {props.handleInputChange}
+                    value={props.search}
                 />
                 <button
                     onClick={props.handleFormSubmit}

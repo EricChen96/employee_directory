@@ -20,7 +20,8 @@ class EmployeeDirectoryContainer extends React.Component {
                         phone: res.data.results[i].phone,
                         email: res.data.results[i].email,
                         dob: res.data.results[i].dob.date,
-                        image: res.data.results[i].picture.thumbnail
+                        image: res.data.results[i].picture.thumbnail,
+                        id: i
                     };
                 };
                 this.setState({ results: tempUsers});
@@ -28,12 +29,20 @@ class EmployeeDirectoryContainer extends React.Component {
                 console.log(err);
             })
     }
+    handleInputChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+          [name]: value,
+        });
+        console.log(this.state.search);
+      };
 
     render() {
         return (
             <div>
                 <HeaderBar />
-                <SearchForm />
+                <SearchForm handleInputChange={this.handleInputChange} search={this.state.search}/>
                 <EmployeeDirectory results={this.state.results} />
             </div>
         );
