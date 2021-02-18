@@ -3,6 +3,7 @@ import SearchForm from "./SearchForm";
 import EmployeeDirectory from "./EmployeeDirectory";
 import React from "react";
 import API from "../utils/API";
+//Increment or decrement filters for column titles
 let columnBooleans = {
     name: false,
     phone: false,
